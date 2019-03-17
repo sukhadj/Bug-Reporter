@@ -1,0 +1,86 @@
+create table Users(id int primary key,username text,email varchar(75),contact int(10),role char,password varchar(64));
+
+create table Projects(project_id int auto_increment primary key,project_title text,project_description text);
+
+create table Bugs(bug_id int auto_increment primary key,bug_title text,bug_description text,user_id int,bug_status char,project_id int REFERENCES Projects(project_id) on delete cascade,os varchar(30),browser varchar(30),foreign key(user_id) REFERENCES Users(id) on delete cascade);
+
+create table Project_Users(project_id int REFERENCES Projects(project_id) on delete cascade,user_id int REFERENCES Users(id) on delete cascade);
+
+// Add users through registration form (RegisterView)
+
+// to change any users role to d 
+update Users set role = 'd' where id=15;
+
+
+// insertion into Projects : some projects:
+insert into Projects values(0,'Octobox','Octobox helps you manage your GitHub notifications efficiently so you can spend less time managing and more time getting things done.Octobox adds an extra archived state to each notification so you can mark it as done. If anything happens on an archived thread, issue or PR, Octobox will move it back into your inbox.Lets be honest, you probably dont have a favourite issue but Octobox lets you highlight important notifications with a star so you can come back and find them easily.');
+
+
+insert into Project_Users values(1004,17);
+
+// bugs
+
+1 Improve keyboard navigation and accessibility
+
+We have lots of keyboard shortcuts for functions already but trying to use Octobox with only a keyboard is quite frustrating.We dont have tabindex on any elements so you cant use any of the following without a mouse
+
+2 Highlighting of issue-under-cursor 
+
+The background color of an issue under the cursor (no matter of read or unread) is almost the same as the background color of an unread issue. This can lead to mistakingly assuming that the issue under the cursor is unread.Yes, there are other differences such as the black bar on the side and boldface text, but they are subtle.
+
+===================================================================================================================================
+
+insert into Projects values(0,'semantic-release','semantic-release automates the whole package release workflow including: determining the next version number, generating the release notes and publishing the package.This removes the immediate connection between human emotions and version numbers, strictly following the Semantic Versioning specification.semantic-release uses the commit messages to determine the type of changes in the codebase. Following formalized conventions for commit messages, semantic-release automatically determines the next semantic version number, generates a changelog and publishes the release.');
+
+
+// bugs 
+1.  Install fails on Windows
+
+Looks like something is trying to find a specific version windows sdk to build a package for windows platform. It is looking for Windows 8.1 but I have Windows 10 which must use different version of SDK that installer is unaware of.Ive had this issue on other packages like phantomjs and they usually have pre-built binaries for the target platform. Is there a separate package that is specifically for Windows?
+
+2 Couldnt authenticate to Github
+
+Hey everyone, just wanted to give yall some clues on my Github password. So it contains !@#$ (in that order). Now the problem is Im not sure why but I couldnt complete semantic-release-cli setup with my password,it was failing the github authentication. I removed those symbols from my password and it started working. Im not sure if this is related to semantic-release or if its a terminal thing. Im on mac, using iterm.
+
+3. Error on setup
+
+This paragraph was a waste of time and space. If you had not read this and I had not typed this you and I could’ve done something more productive than reading this mindlessly and carelessly as if you did not have anything else to do in life. Life is so precious because it is short and you are being so careless that you do not realize it until now since this void paragraph mentions that you are doing something so mindless, so stupid, so careless that you realize that you are not using your time wisely. You could’ve been playing with your dog, or eating your cat, but no. You want to read this barren paragraph and expect something marvelous and terrific at the end.
+
+===================================================================================================================================
+
+insert into Projects values(0,'Keras: Deep Learning for humans','Keras is a high-level neural networks API, written in Python and capable of running on top of TensorFlow, CNTK, or Theano. It was developed with a focus on enabling fast experimentation. Being able to go from idea to result with the least possible delay is key to doing good research.Keras is an API designed for human beings, not machines. It puts user experience front and center. Keras follows best practices for reducing cognitive load: it offers consistent & simple APIs, it minimizes the number of user actions required for common use cases, and it provides clear and actionable feedback upon user error.');
+
+
+// Bugs
+
+1 Memory leak in *_generator
+
+Check that you are up-to-date with the master branch of Keras. You can update with:pip install git+git://github.com/keras-team/keras.git --upgrade --no-deps. Since tf 1.8, the memory leak is worse. Its only happening when calling fit/evaluate multiple time so this is not likely to happen in a real setting. But this may have played a role.I can confirm this behaviour across several systems + sometimes GPU memory also doesnt get properly cleaned causing OOMs. I have noticed that the worker processes dont always terminate after fitting is done/interrupted.
+
+2 Error when load combined mobile-net
+
+I used code below to combine 2 mobile-net model. After combine i save model as combined.hdf5.Keras version: 2.2.0 Using TensorFlow backend.Experiencing the same issue with exact same keras and tf versions. Using mobilenet backend in keras-yolo2 library.I made a reproducible example.I think it has to do with naming.Keras doesnt check the naming scope before creating names. So if you create the same model twice, the name are duplicated.
+
+
+====================================================================================================================================
+
+insert into Projects values(0,'CloudCV:fabrik','Fabrik is an online collaborative platform to build, visualize and train deep learning models via a simple drag-and-drop interface. It allows researchers to collaboratively develop and debug models using a web GUI that supports importing, editing and exporting networks written in widely popular frameworks like Caffe, Keras, and TensorFlow.The model conversion between currently supported frameworks is tested on some models.Inception V3,Inception V4,GoogleNet,PixelNet,PointNet');
+
+
+// bugs
+
+1 cannot load Lenet.pbtxt
+
+Attached the file for reference ,renamed the extension as .txt to upload here.Is there a certain way or initialization we need to follow to create the .pbtxt files to load in fabrik?Any help on this will be great.You have to parse the pbtxt file into a GraphDef object. This following link describes one way to do it.
+
+
+2 "str" error while editing some params value in layers
+
+While editing some parameters value in layer it throws an error when exporting the model:"(edited float value)" has type str, but expected one of: int, long, float.I have resolved the issue and will send PR.This issue was solved and I sent a PR regarding the same.It was the issue of wrong datatype declaration.
+
+
+3 Dots Appearing on The Wrong Place
+
+When I add a new layer, the grey dots appeared at the wrong place.
+
+===================================================================================================================================
